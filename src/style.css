@@ -1,0 +1,355 @@
+:root {
+    --bg-color: #121212;
+    --card-bg: #1e1e1e;
+    --text-color: #e0e0e0;
+    --accent-user1: #ff4081;
+    --accent-user2: #448aff;
+    --border-color: #333;
+    --item-bg: #2d2d2d;
+    --menu-bg: rgba(0, 0, 0, 0.85);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    height: 100dvh;
+    /* Better for mobile browsers with address bar */
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* Title is editable */
+h1 {
+    margin: 0 0 5px 0;
+    text-align: center;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    padding: 5px;
+    border-bottom: 1px dashed transparent;
+    cursor: text;
+}
+
+h1:focus {
+    outline: none;
+    border-bottom-color: #666;
+    background: #1a1a1a;
+}
+
+.container {
+    display: flex;
+    gap: 6px;
+    flex: 1;
+    overflow: hidden;
+    /* Crucial for scrollable columns */
+    min-height: 0;
+}
+
+.column {
+    flex: 1;
+    background: var(--card-bg);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-color);
+    min-width: 0;
+}
+
+.col-header {
+    padding: 8px;
+    text-align: center;
+    font-weight: 700;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    /* Header should not shrink */
+}
+
+#col-user1 .col-header {
+    color: var(--accent-user1);
+    border-bottom: 2px solid var(--accent-user1);
+}
+
+#col-user2 .col-header {
+    color: var(--accent-user2);
+    border-bottom: 2px solid var(--accent-user2);
+}
+
+.list {
+    flex: 1;
+    overflow-y: auto;
+    /* Scroll within the list */
+    list-style: none;
+    padding: 5px;
+    margin: 0;
+    scrollbar-width: thin;
+    scrollbar-color: #444 transparent;
+}
+
+.list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.list::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 2px;
+}
+
+/* Compact item styling */
+.list-item {
+    background: var(--item-bg);
+    margin-bottom: 4px;
+    padding: 4px 6px;
+    padding: 4px 6px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    transition: transform 0.2s ease, background 0.2s;
+}
+
+.score-trigger {
+    width: 28px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid #444;
+    background: #222;
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.score-trigger.is-user1 {
+    border-color: var(--accent-user1);
+    color: var(--accent-user1);
+}
+
+.score-trigger.is-user2 {
+    border-color: var(--accent-user2);
+    color: var(--accent-user2);
+}
+
+.item-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Editable text in the list */
+.item-text {
+    font-size: 0.8rem;
+    font-size: 0.8rem;
+    line-height: 1.1;
+    word-wrap: break-word;
+    width: 100%;
+    padding: 2px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.item-text:focus {
+    outline: none;
+    background: #000;
+    border-color: #555;
+    color: #fff;
+}
+
+.total-badge {
+    font-size: 0.65rem;
+    background: #383838;
+    padding: 1px 6px;
+    border-radius: 10px;
+    margin-top: 2px;
+    color: #aaa;
+    font-weight: bold;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: #444;
+    font-size: 1.2rem;
+    padding: 0;
+    cursor: pointer;
+    line-height: 1;
+    width: 16px;
+    text-align: center;
+}
+
+.delete-btn:hover {
+    color: #ff5252;
+}
+
+.controls {
+    padding: 8px;
+    border-top: 1px solid var(--border-color);
+    background: #252525;
+    flex-shrink: 0;
+    /* Controls should not shrink/disappear */
+}
+
+.add-row {
+    display: flex;
+    gap: 5px;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 8px;
+    background: #111;
+    border: 1px solid #444;
+    color: white;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    min-width: 0;
+    /* Important for flexbox */
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #888;
+}
+
+button.add-btn {
+    border: none;
+    color: white;
+    width: 35px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+button.add-btn.user1-btn {
+    background: var(--accent-user1);
+}
+
+button.add-btn.user2-btn {
+    background: var(--accent-user2);
+}
+
+/* Prevent rich text paste in contenteditable */
+[contenteditable] {
+    -webkit-user-modify: read-write-plaintext-only;
+}
+
+/* --- RADIAL MENU STYLES --- */
+#menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--menu-bg);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    backdrop-filter: blur(5px);
+}
+
+#menu-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.radial-menu {
+    position: relative;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+}
+
+.menu-btn {
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #333;
+    color: white;
+    border: 2px solid #555;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s, background 0.2s;
+    top: 50%;
+    left: 50%;
+}
+
+.menu-btn.selected {
+    background: white;
+    color: black;
+    border-color: white;
+    transform: translate(-50%, -50%) scale(1.2);
+    z-index: 10;
+}
+
+.menu-center-info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #888;
+    pointer-events: none;
+}
+
+.menu-center-name {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+.radial-menu.theme-user1 .menu-btn:active {
+    background: var(--accent-user1);
+    border-color: var(--accent-user1);
+}
+
+.radial-menu.theme-user1 .menu-center-name {
+    color: var(--accent-user1);
+}
+
+.radial-menu.theme-user2 .menu-btn:active {
+    background: var(--accent-user2);
+    border-color: var(--accent-user2);
+}
+
+.radial-menu.theme-user2 .menu-center-name {
+    color: var(--accent-user2);
+}
+
+.menu-cancel {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #aaa;
+    font-size: 0.9rem;
+    text-decoration: underline;
+    cursor: pointer;
+}

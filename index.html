@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="SuperBalancer - A simple shared balancing list for two users. Keep track of scores and items easily.">
+    <meta name="theme-color" content="#121212">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚖️</text></svg>">
+    <title>SuperBalancer</title>
+    <link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+    <h1 id="app-title" contenteditable="true" spellcheck="false">SuperBalancer</h1>
+
+    <div class="container">
+        <!-- Kolom User 1 -->
+        <div class="column" id="col-user1">
+            <div class="col-header" id="header-user1" contenteditable="true" spellcheck="false">Jane</div>
+            <ul class="list" id="list-user1"></ul>
+            <div class="controls">
+                <div class="add-row">
+                    <input type="text" id="new-user1" placeholder="Item..." autocomplete="off" aria-label="New item for User 1">
+                    <button class="add-btn user1-btn" id="add-btn-user1" aria-label="Add item">+</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kolom User 2 -->
+        <div class="column" id="col-user2">
+            <div class="col-header" id="header-user2" contenteditable="true" spellcheck="false">Joe</div>
+            <ul class="list" id="list-user2"></ul>
+            <div class="controls">
+                <div class="add-row">
+                    <input type="text" id="new-user2" placeholder="Item..." autocomplete="off" aria-label="New item for User 2">
+                    <button class="add-btn user2-btn" id="add-btn-user2" aria-label="Add item">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align:center; margin-top:5px; font-size:0.7rem; color:#444;">
+        <span id="reset-btn">Reset</span>
+    </div>
+
+    <!-- RADIAL MENU OVERLAY -->
+    <div id="menu-overlay">
+        <div class="radial-menu" id="radial-menu">
+            <div class="menu-center-info">
+                <div class="menu-center-name" id="menu-title">Naam</div>
+                <div style="font-size:0.8rem">Kies Cijfer</div>
+            </div>
+        </div>
+        <div class="menu-cancel">Annuleren</div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>
