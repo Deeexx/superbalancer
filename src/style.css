@@ -113,6 +113,23 @@ h1:focus {
     justify-content: space-between;
     gap: 6px;
     transition: transform 0.2s ease, background 0.2s;
+    cursor: grab;
+}
+
+.list-item:active {
+    cursor: grabbing;
+}
+
+.list-item.dragging {
+    opacity: 0.5;
+    transform: scale(0.95);
+    background: #444;
+}
+
+.list.drag-over {
+    background: rgba(255, 255, 255, 0.05);
+    outline: 2px dashed #666;
+    outline-offset: -2px;
 }
 
 .score-trigger {

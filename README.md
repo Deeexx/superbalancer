@@ -38,6 +38,7 @@ SuperBalancer is a lightweight, shared balancing list application designed for t
 - **Radial Menu**: Clicking on a score trigger opens a circular menu for quick score selection (0-10).
 - **Editable UI**: The app title and user names are directly editable and saved automatically.
 - **Dynamic Sorting**: Items are automatically sorted by their total score (weighted sum).
+- **Drag and Drop**: Easily move items between columns to balance them.
 - **Persistence**: All data, including names and custom title, is persisted in `localStorage`.
 
 ## 📡 Deployment

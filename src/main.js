@@ -36,6 +36,19 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('menu-overlay').onclick = (e) => closeMenu(e);
     document.querySelector('.menu-cancel').onclick = () => closeMenu(null, true);
 
+    // Drag and Drop Listeners for Columns
+    ['user1', 'user2'].forEach(owner => {
+        const listEl = document.getElementById(`list-${owner}`);
+        listEl.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            listEl.classList.add('drag-over');
+        });
+        listEl.addEventListener('dragleave', () => {
+            listEl.classList.remove('drag-over');
+        });
+        listEl.addEventListener('drop', (e) => handleDrop(e, owner));
+    });
+
     // Global paste handler for contenteditable cleanliness
     document.addEventListener('paste', (e) => {
         const target = e.target;
@@ -137,6 +150,44 @@ function loadData() {
     }
 }
 
+/* --- DRAG & DROP LOGIC --- */
+
+function handleDragStart(e, id, owner) {
+    e.dataTransfer.setData('text/plain', JSON.stringify({ id, owner }));
+    e.currentTarget.classList.add('dragging');
+}
+
+function handleDragEnd(e) {
+    e.currentTarget.classList.remove('dragging');
+}
+
+function handleDrop(e, toOwner) {
+    e.preventDefault();
+    const listEl = document.getElementById(`list-${toOwner}`);
+    listEl.classList.remove('drag-over');
+
+    try {
+        const data = JSON.parse(e.dataTransfer.getData('text/plain'));
+        const { id, owner: fromOwner } = data;
+
+        if (fromOwner !== toOwner) {
+            moveItem(id, fromOwner, toOwner);
+        }
+    } catch (err) {
+        console.error("Drop failed:", err);
+    }
+}
+
+function moveItem(id, fromOwner, toOwner) {
+    const itemIndex = appData[fromOwner].findIndex(i => i.id === id);
+    if (itemIndex > -1) {
+        const [item] = appData[fromOwner].splice(itemIndex, 1);
+        appData[toOwner].push(item);
+        saveData();
+        renderAll();
+    }
+}
+
 /* --- UI LOGIC --- */
 
 window.openMenu = function (id, owner, scorer, currentVal) {
@@ -214,6 +265,10 @@ function renderList(owner) {
         const total = (item.score1 || 0) + (item.score2 || 0);
         const li = document.createElement('li');
         li.className = 'list-item';
+        li.draggable = true;
+
+        li.ondragstart = (e) => handleDragStart(e, item.id, owner);
+        li.ondragend = (e) => handleDragEnd(e);
 
         li.innerHTML = `
             <div class="score-trigger is-user1" onclick="openMenu(${item.id}, '${owner}', '1', ${item.score1})" role="button" aria-label="Set User 1 Score">
